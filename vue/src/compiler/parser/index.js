@@ -74,12 +74,13 @@ export function createASTElement (
 }
 
 /**
- * Convert HTML string to AST.
+ * 把HTML转化成AST抽象语法树.
  */
 export function parse (
   template: string,
   options: CompilerOptions
 ): ASTElement | void {
+  /* 这一段为获取平台配置跟定义方法 */ 
   warn = options.warn || baseWarn
 
   platformIsPreTag = options.isPreTag || no
@@ -98,10 +99,8 @@ export function parse (
 
   delimiters = options.delimiters
 
-  const stack = []
   const preserveWhitespace = options.preserveWhitespace !== false
   const whitespaceOption = options.whitespace
-  let root
   let currentParent
   let inVPre = false
   let inPre = false
@@ -204,7 +203,10 @@ export function parse (
       )
     }
   }
-
+  // 这里开始解析HTML模板
+  const stack = [] // 这个栈暂存对parseHTML返回的结果
+  let root // 语法树的根节点
+  // 通过 parseHTML 循环解析 template 用正则做各种匹配，直到整个 template 被解析完毕
   parseHTML(template, {
     warn,
     expectHTML: options.expectHTML,
@@ -214,6 +216,8 @@ export function parse (
     shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
     shouldKeepComment: options.comments,
     outputSourceRange: options.outputSourceRange,
+    // 上面是一些配置
+    // 匹配到开始标签时触发
     start (tag, attrs, unary, start, end) {
       // check namespace.
       // inherit parent ns if there is one
@@ -300,7 +304,7 @@ export function parse (
         closeElement(element)
       }
     },
-
+    // 匹配到结束标签时触发
     end (tag, start, end) {
       const element = stack[stack.length - 1]
       // pop stack
@@ -383,6 +387,7 @@ export function parse (
         }
       }
     },
+    // 匹配到注释节点触发
     comment (text: string, start, end) {
       // adding anything as a sibling to the root node is forbidden
       // comments should still be allowed, but ignored

@@ -8,23 +8,20 @@ let isPlatformReservedTag
 const genStaticKeysCached = cached(genStaticKeys)
 
 /**
- * Goal of the optimizer: walk the generated template AST tree
- * and detect sub-trees that are purely static, i.e. parts of
- * the DOM that never needs to change.
- *
- * Once we detect these sub-trees, we can:
- *
- * 1. Hoist them into constants, so that we no longer need to
- *    create fresh nodes for them on each re-render;
- * 2. Completely skip them in the patching process.
+ * 优化器的目标：遍历生成的模板 AST 树
+ * 并检测纯静态的子树，即
+ * 永远不需要改变的 DOM。
+ *一旦我们检测到这些子树，我们可以：
+ *1. 将它们提升为常量，这样我们就不再需要在每次重新渲染时为它们创建新节点；
+ *2.在补丁过程中完全跳过它们
  */
 export function optimize (root: ?ASTElement, options: CompilerOptions) {
   if (!root) return
   isStaticKey = genStaticKeysCached(options.staticKeys || '')
   isPlatformReservedTag = options.isReservedTag || no
-  // first pass: mark all non-static nodes.
+  // 标记所有静态节点
   markStatic(root)
-  // second pass: mark static roots.
+  // 标记静态根
   markStaticRoots(root, false)
 }
 

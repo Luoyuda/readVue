@@ -19,23 +19,6 @@ export function createCompilerCreator (baseCompile: Function): Function {
       }
 
       if (options) {
-        if (process.env.NODE_ENV !== 'production' && options.outputSourceRange) {
-          // $flow-disable-line
-          const leadingSpaceLength = template.match(/^\s*/)[0].length
-
-          warn = (msg, range, tip) => {
-            const data: WarningMessage = { msg }
-            if (range) {
-              if (range.start != null) {
-                data.start = range.start + leadingSpaceLength
-              }
-              if (range.end != null) {
-                data.end = range.end + leadingSpaceLength
-              }
-            }
-            (tip ? tips : errors).push(data)
-          }
-        }
         // merge custom modules
         if (options.modules) {
           finalOptions.modules =
@@ -57,11 +40,15 @@ export function createCompilerCreator (baseCompile: Function): Function {
       }
 
       finalOptions.warn = warn
-
-      const compiled = baseCompile(template.trim(), finalOptions)
-      if (process.env.NODE_ENV !== 'production') {
-        detectErrors(compiled.ast, warn)
+      // 通过baseCompile进行模板编译 由之前的代码可以看出返回结果为
+      /*
+      {
+        ast, // 抽象语法树
+        render: code.render, // render字符串
+        staticRenderFns: code.staticRenderFns // 编译辅助函数
       }
+      */
+      const compiled = baseCompile(template.trim(), finalOptions)
       compiled.errors = errors
       compiled.tips = tips
       return compiled

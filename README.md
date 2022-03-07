@@ -9,3 +9,5 @@
 ### [4-Observer](https://github.com/Luoyuda/readVue/tree/main/4-Observer)
 
 ### [5-Watcher](https://github.com/Luoyuda/readVue/tree/main/5-Watcher)
+
+### [6-render](https://github.com/Luoyuda/readVue/tree/main/6-Render)
