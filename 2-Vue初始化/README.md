@@ -250,7 +250,7 @@ export function initGlobalAPI (Vue: GlobalAPI) {
 
 以上就是 `Vue`  类中的基本内容
 
-![Vue类](C:\code\readVue\2-Vue初始化\Vue类.png)
+![Vue类](2-Vue初始化\Vue类.png)
 
 ## new Vue()
 
