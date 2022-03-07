@@ -10,4 +10,6 @@
 
 ### [5-Watcher](https://github.com/Luoyuda/readVue/tree/main/5-Watcher)
 
-### [6-render](https://github.com/Luoyuda/readVue/tree/main/6-Render)
+### [6-render](https://github.com/Luoyuda/readVue/tree/main/6-render)
+
+### [7-diff](https://github.com/Luoyuda/readVue/tree/main/7-diff)
