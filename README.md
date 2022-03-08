@@ -14,4 +14,4 @@
 
 ### [7-diff](https://github.com/Luoyuda/readVue/tree/main/7-diff)
 
-### [8-手写Vue响应式原理](https://github.com/Luoyuda/readVue/tree/main/myvue)
+### [8-手写Vue响应式原理](https://github.com/Luoyuda/readVue/tree/main/MyVue)
