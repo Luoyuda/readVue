@@ -210,7 +210,7 @@ export function mergeOptions (
 
 总结起来就是
 
-	1. 如果存在父类，将父类上的`options`先合并到当前的`options`中
-	1. 接下去归一化处理`props` `inject` `directive`
-	1. 合并`extends` `mixins`
-	1. 根据`strats[name]`上的函数进行合并操作，默认子类覆盖父类
+1. 如果存在父类，将父类上的`options`先合并到当前的`options`中
+2. 接下去归一化处理`props` `inject` `directive`
+3. 合并`extends` `mixins`
+4. 根据`strats[name]`上的函数进行合并操作，默认子类覆盖父类
